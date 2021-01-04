@@ -47,17 +47,20 @@ async def search(ctx, *, term):
     try:
         data = getEntry(term.lower())
     except ValueError:
-        await ctx.send('Invalid search term!')
+        await ctx.send('No Results')
         return
     if not data:
-        await ctx.send('Invalid search term!')
+        await ctx.send('No Results')
         return
-    term = capAll(term)
-    embed.set_author(name=term)
-    embed.add_field(name='Category', value=capAll(data['category']), inline=False)
-    embed.add_field(name='ID', value=data['id'], inline=False)
-    embed.add_field(name='Description', value=data['description'], inline=False)
-    embed.add_field(name='Drops', value='\n'.join(' - ' + capAll(i) for i in data['drops']), inline=False)
+
+    for loop in data:
+        value_ = data[loop]
+        if isinstance(value_, list):
+            value_ = '\n'.join('- ' + i for i in value_)
+
+        if value_:
+            embed.add_field(name=capAll(loop), value=str(value_), inline=False)
+
     await ctx.send(embed=embed)
 
 
