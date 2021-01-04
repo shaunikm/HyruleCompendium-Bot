@@ -66,4 +66,4 @@ async def ping(ctx):
     await ctx.send(f'Pong!\nClient Latency: `{round(client.latency*1000)}ms`')
 
 
-client.run(os.getenv('token'))
+client.run(os.getenv('HYRULE_COMPENDIUM_BOT_TOKEN'))

@@ -11,5 +11,5 @@
 <br>
 <br>
 <div align="right">
-<p>Made with awesomeness by <a href="https://github.com/shaunikm">@shaunikm</a></p>
+<p>Made with awesomeness by <a href="https://github.com/shaunikm">@shaunikm</a> and <a href="https://github.com/shaunikm">@gadhagod</a></p>
 </div>
