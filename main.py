@@ -1,9 +1,11 @@
 import os
 import discord
 from discord.ext import commands
-from HyruleCompendium import getEntry
+from pyrule_compendium import compendium
 
 client = commands.Bot(command_prefix='!')
+
+comp = compendium()
 
 client.remove_command('help')
 commandsHelpList = ['!help', '!invite', '!search']
@@ -45,7 +47,7 @@ async def help(ctx):
 async def search(ctx, *, term):
     embed = discord.Embed(colour=discord.Colour.gold())
     try:
-        data = getEntry(term.lower())
+        data = comp.get_entry(term.lower())
     except ValueError:
         await ctx.send('No Results')
         return
