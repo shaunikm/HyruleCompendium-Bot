@@ -13,7 +13,7 @@ data_order = ['description', 'attack', 'defense', 'drops', 'hearts_recovered', '
 client.remove_command('help')
 commandsHelpList = ['!help', '!search', '!invite']
 descriptionHelpList = ['View the message you\'re seeing right now.',
-                       'Get the invite link for this bot to invite it to more servers!',
+                       'Search for an entry in the Hyrule Compendium.',
                        'Get the invite link for this bot to invite it to more servers!']
 
 
