@@ -1,4 +1,4 @@
-name: Authenticate images
+name: Deploy
 
 on:
   push:
