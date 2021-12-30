@@ -11,7 +11,7 @@ comp = compendium()
 data_order = ['description', 'attack', 'defense', 'drops', 'hearts_recovered', 'cooking_effect', 'common_locations']
 
 client.remove_command('help')
-commandsHelpList = ['!help', '!search', '!invite']
+commandsHelpList = ['!help', '!search [item]', '!invite']
 descriptionHelpList = ['View the message you\'re seeing right now.',
                        'Search for an entry in the Hyrule Compendium.',
                        'Get the invite link for this bot to invite it to more servers!']
