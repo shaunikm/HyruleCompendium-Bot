@@ -39,7 +39,7 @@ async def on_ready():
 @client.command(aliases=['inv', 'i'])
 async def invite(ctx):
     inv_button = Button(
-        url='https://discord.com/api/oauth2/authorize?client_id=795444152443207680&permissions=509952&scope=bot',
+        url='https://discord.com/oauth2/authorize?client_id=926198736907034624&permissions=509952&scope=bot',
         label='Click Me 🤖',
         style=5)
 
