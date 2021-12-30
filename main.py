@@ -30,9 +30,9 @@ def cap_all(in_str: str):
         term_list[term_list.index(i)] = term_list[term_list.index(i)].capitalize()
     return ' '.join(i for i in term_list)
 
-
 @client.event
 async def on_ready():
+    await client.change_presence(activity=discord.Game(name='!help and explore Hyrule'))
     print('Bot is ready!')
 
 
