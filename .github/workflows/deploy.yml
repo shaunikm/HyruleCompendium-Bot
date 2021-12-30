@@ -1,0 +1,20 @@
+name: Authenticate images
+
+on:
+  push:
+      branches:
+        - main
+  workflow_dispatch:
+
+jobs:
+  main:
+
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v2
+      - name: Obtain keys
+        run: (curl http://hyrule-compendium-bot.herokuapp.com -H "$${{ secrets.BOT_AUTH }}") > secret
+      
+      - name: SSH Tunnel
+        run: ssh -i secret ${{ secrets.IP }}
