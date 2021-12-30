@@ -11,10 +11,10 @@ comp = compendium()
 data_order = ['description', 'attack', 'defense', 'drops', 'hearts_recovered', 'cooking_effect', 'common_locations']
 
 client.remove_command('help')
-commandsHelpList = ['!help', '!invite', '!search']
+commandsHelpList = ['!help', '!search', '!invite']
 descriptionHelpList = ['View the message you\'re seeing right now.',
                        'Get the invite link for this bot to invite it to more servers!',
-                       'Search for an entry in the Hyrule Compendium']
+                       'Get the invite link for this bot to invite it to more servers!']
 
 
 def get_key_from_value(dict_, value):
@@ -50,7 +50,7 @@ async def invite(ctx):
 
 @client.command(aliases=['h', 'help'])
 async def help_(ctx):
-    embed = discord.Embed(colour=discord.Colour.red())
+    embed = discord.Embed(colour=discord.Colour.red(), title='Discord Sheikah Slate', description='This discord bot gives you access to the Hyrule Compendium from here on discord!')
     for command, description in zip(commandsHelpList, descriptionHelpList):
         embed.add_field(name=command, value=description, inline=False)
     await ctx.send(embed=embed)
@@ -61,7 +61,7 @@ async def search(ctx, *, term):
     try:
         data = comp.get_entry(term.lower())
     except exceptions.NoEntryError:
-        await ctx.send('No Results')
+        await ctx.send(f'Item `{term}` not found!')
         return
 
     embed = discord.Embed(colour=discord.Colour.gold(), title=cap_all(data['name']))
