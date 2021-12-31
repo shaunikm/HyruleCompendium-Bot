@@ -3,6 +3,7 @@ import discord
 from discord_components import Button
 from discord.ext import commands
 from pyrule_compendium import compendium, exceptions
+import extra_items
 
 client = commands.Bot(command_prefix='!')
 
@@ -16,19 +17,6 @@ descriptionHelpList = ['View the message you\'re seeing right now.',
                        'Search for an entry in the Hyrule Compendium.',
                        'Get the invite link for this bot to invite it to more servers!']
 
-
-def get_key_from_value(dict_, value):
-    dict_keys = list(dict_.keys())
-    dict_values = list(dict_.values())
-    key = dict_keys[dict_values.index(value)]
-    return key
-
-
-def cap_all(in_str: str):
-    term_list = [i for i in in_str.split()]
-    for i in term_list:
-        term_list[term_list.index(i)] = term_list[term_list.index(i)].capitalize()
-    return ' '.join(i for i in term_list)
 
 @client.event
 async def on_ready():
@@ -61,16 +49,20 @@ async def search(ctx, *, term):
     try:
         data = comp.get_entry(term.lower())
     except exceptions.NoEntryError:
-        await ctx.send(f'Item `{term}` not found!')
+        closest_match = extra_items.format_closest_match(term, extra_items.indexed_dict)
+        if closest_match:
+            await ctx.send(f'Item `{term}` not found!\nDid you mean: `{closest_match}`?')
+        else:
+            await ctx.send(f'Item `{term}` not found!')
         return
 
-    embed = discord.Embed(colour=discord.Colour.gold(), title=cap_all(data['name']))
+    embed = discord.Embed(colour=discord.Colour.gold(), title=extra_items.cap_all(data['name']))
     embed.set_thumbnail(url=data['image'])
     for i in data_order:
         try:
             value_ = data[i]
-            title = get_key_from_value(data, value_)
-            head = cap_all(title.replace('_', ' '))
+            title = extra_items.get_key_from_value(data, value_)
+            head = extra_items.cap_all(title.replace('_', ' '))
             if isinstance(value_, list):
                 if 'Greater Hyrule' in value_:
                     value_ = u'\u2022 Everywhere'
