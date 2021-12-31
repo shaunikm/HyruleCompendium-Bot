@@ -3,7 +3,7 @@ import discord
 from discord_components import Button
 from discord.ext import commands
 from pyrule_compendium import compendium, exceptions
-import extra_items
+import utils
 
 client = commands.Bot(command_prefix='!')
 
@@ -49,20 +49,20 @@ async def search(ctx, *, term):
     try:
         data = comp.get_entry(term.lower())
     except exceptions.NoEntryError:
-        closest_match = extra_items.format_closest_match(term, extra_items.indexed_dict)
+        closest_match = utils.format_closest_match(term, utils.indexed_dict)
         if closest_match:
             await ctx.send(f'Item `{term}` not found!\nDid you mean: `{closest_match}`?')
         else:
             await ctx.send(f'Item `{term}` not found!')
         return
 
-    embed = discord.Embed(colour=discord.Colour.gold(), title=extra_items.cap_all(data['name']))
+    embed = discord.Embed(colour=discord.Colour.gold(), title=utils.cap_all(data['name']))
     embed.set_thumbnail(url=data['image'])
     for i in data_order:
         try:
             value_ = data[i]
-            title = extra_items.get_key_from_value(data, value_)
-            head = extra_items.cap_all(title.replace('_', ' '))
+            title = utils.get_key_from_value(data, value_)
+            head = utils.cap_all(title.replace('_', ' '))
             if isinstance(value_, list):
                 if 'Greater Hyrule' in value_:
                     value_ = u'\u2022 Everywhere'
