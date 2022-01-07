@@ -43,7 +43,7 @@ async def help_(ctx):
         embed.add_field(name=command, value=description, inline=False)
     embed.add_field(name='Other Links', value='[GitHub](https://github.com/shaunikm/HyruleCompendium-Bot)'
                                               '\u200b \u200b \u200b [Data API](https://gadhagod.github.io/Hyrule-Compendium-API/#/)'
-                                              '\u200b \u200b \u200b [Creator](https://github.com/shaunikm)')
+                                              '\u200b \u200b \u200b [Author](https://github.com/shaunikm)')
     await ctx.send(embed=embed)
 
 
