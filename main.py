@@ -41,6 +41,9 @@ async def help_(ctx):
     embed = discord.Embed(colour=discord.Colour.red(), title='Discord Sheikah Slate', description='This discord bot gives you access to the Hyrule Compendium from here on discord!')
     for command, description in zip(commandsHelpList, descriptionHelpList):
         embed.add_field(name=command, value=description, inline=False)
+    embed.add_field(name='Other Links', value='[GitHub](https://github.com/shaunikm/HyruleCompendium-Bot)'
+                                              '\u200b \u200b \u200b [Data API](https://gadhagod.github.io/Hyrule-Compendium-API/#/)'
+                                              '\u200b \u200b \u200b [Author](https://github.com/shaunikm)')
     await ctx.send(embed=embed)
 
 
